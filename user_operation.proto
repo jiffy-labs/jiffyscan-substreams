@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package gtms.user_operations.v1;
+
+message UserOperations {
+  repeated UserOperation user_operations = 1;
+}
+
+message UserOperation {
+  bytes userOpHash = 1;
+  bytes sender = 2;
+  bytes paymaster = 3;
+  string nonce = 4;
+  bool success = 5;
+  string actualGasCost = 6;
+  string actualGasUsed = 7;
+}

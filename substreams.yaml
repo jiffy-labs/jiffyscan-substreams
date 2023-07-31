@@ -1,0 +1,31 @@
+specVersion: v0.1.0
+package:
+  name: 'substreams_ethereum_quickstart'
+  version: v1.0.0
+
+protobuf:
+  files:
+    - user_operation.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+
+  - name: map_user_operations
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:gtms.user_operations.v1.UserOperations
+
+  - name: store_user_operations
+    kind: store
+    updatePolicy: set
+    valueType: proto:gtms.user_operations.v1.UserOperations
+    inputs:
+      - map: map_user_operations
