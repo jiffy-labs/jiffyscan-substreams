@@ -1,6 +1,6 @@
 specVersion: v0.1.0
 package:
-  name: 'substreams_ethereum_quickstart'
+  name: 'jiffyscan_substreams'
   version: v1.0.0
 
 protobuf:
@@ -18,14 +18,23 @@ modules:
 
   - name: map_user_operations
     kind: map
+    initialBlock: 45628802
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:gtms.user_operations.v1.UserOperations
 
-  - name: store_user_operations
-    kind: store
-    updatePolicy: set
-    valueType: proto:gtms.user_operations.v1.UserOperations
+  - name: graph_out
+    kind: map
+    initialBlock: 45628802
     inputs:
       - map: map_user_operations
+    output:
+      type: proto:sf.substreams.sink.entity.v1.EntityChanges
+
+  - name: db_out
+    kind: map
+    inputs:
+      - map: map_user_operations
+    output:
+      type: proto:sf.substreams.sink.database.v1.DatabaseChanges

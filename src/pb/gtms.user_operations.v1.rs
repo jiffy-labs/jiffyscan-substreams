@@ -22,5 +22,7 @@ pub struct UserOperation {
     pub actual_gas_cost: ::prost::alloc::string::String,
     #[prost(string, tag="7")]
     pub actual_gas_used: ::prost::alloc::string::String,
+    #[prost(uint64, tag="8")]
+    pub log_ordinal: u64,
 }
 // @@protoc_insertion_point(module)

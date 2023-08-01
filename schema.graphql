@@ -1,0 +1,10 @@
+type UserOperations @entity {
+    id: ID!
+    userOpHash: Bytes
+    sender: Bytes
+    paymaster: Bytes
+    nonce: BigInt
+    success: BigInt
+    actualGasCost: BigInt
+    actualGasUsed: BigInt
+}
